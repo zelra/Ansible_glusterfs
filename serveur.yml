@@ -1,0 +1,25 @@
+---
+# Ce playbook permet de déployer un cluster glusterfs
+
+- name: Mise en place des fonctionnalités de base 
+  hosts: all
+  remote_user: root
+ 
+  roles:
+    - setup
+
+- name: Installation et configuration des serveurs esclaves 
+  hosts: esclave
+  remote_user: root
+
+  roles:
+    - glusterfs_esclave
+    - ucarp_esclave
+
+- name: Installation et configuration du serveur maitre
+  hosts: maitre
+  remote_user: root
+
+  roles:
+    - glusterfs_maitre
+    - ucarp_maitre

@@ -1,0 +1,13 @@
+
+##############################
+##### UCARP Configuration #####
+ucarp-vid        1
+ucarp-vip        192.168.220.100
+ucarp-password   secret
+ucarp-advskew    1
+ucarp-advbase    2
+ucarp-master     no
+
+iface eth0:ucarp inet static
+         address 192.168.220.100
+         netmask 255.255.255.0

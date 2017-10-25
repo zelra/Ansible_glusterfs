@@ -1,0 +1,23 @@
+---
+  - name: Installation du serveur glusterfs
+    apt:
+      state=latest
+      name=glusterfs-server
+
+  - name: Création du fichier de partage  
+    file: path=/srv/shared state=directory
+
+  - name: Ajout des glusters
+    command: gluster peer probe "{{ item }}"
+    with_items:
+      - glusterfs2
+      - glusterfs3
+      - glusterfs4
+      - glusterfs5
+
+  - name: Création du volume 
+    command: gluster volume create volume1 replica 5 transport tcp glusterfs1:/srv/shared glusterfs2:/srv/shared glusterfs3:/srv/shared glusterfs4:/srv/shared glusterfs5:/srv/shared force
+
+  - name: Démarrage du volume
+    command: gluster volume start volume1
+

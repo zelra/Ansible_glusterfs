@@ -1,0 +1,17 @@
+---
+  - name: Installation de ucarp 
+    apt:
+      state=latest
+      name=ucarp
+
+  - name: Ajout de la configuration 'esclave' de ucarp
+    blockinfile:
+      block: "{{ lookup('file', '{{ role_path }}/templates/ucarp_esclave') }}"
+      dest: "/etc/network/interfaces"
+      insertafter: EOF
+      marker: ""
+
+  - name: Redémarrage du service networking
+    service: 
+      name: networking
+      state: restarted

@@ -1,0 +1,8 @@
+[esclave]
+glusterfs2
+glusterfs3
+glusterfs4
+glusterfs5
+
+[maitre]
+glusterfs1

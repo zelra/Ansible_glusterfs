@@ -1,0 +1,8 @@
+---
+  - name: Installation des serveurs glusterfs esclaves
+    apt:
+      state=latest
+      name=glusterfs-server
+
+  - name: Création du fichier de partage
+    file: path=/srv/shared state=directory

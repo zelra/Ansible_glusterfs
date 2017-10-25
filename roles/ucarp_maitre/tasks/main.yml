@@ -1,0 +1,21 @@
+---
+  - name: Installation de ucarp 
+    apt:
+      state=latest
+      name=ucarp
+
+  - name: Ajout de la configuration 'maitre' de ucarp
+    blockinfile:
+      block: "{{ lookup('file', '{{ role_path }}/templates/ucarp_maitre') }}"
+      dest: "/etc/network/interfaces"
+      insertafter: EOF
+      marker: ""
+
+  - name: Redémarrage du service networking
+    service:
+      name: networking
+      state: restarted
+
+  - name: Démarrage de l'interface virtuelle
+    command: ifup eth0:ucarp
+

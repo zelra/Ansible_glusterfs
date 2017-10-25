@@ -1,0 +1,15 @@
+---
+  - name: Installation des fonctionnalités de base
+    apt: 
+      update_cache=yes
+      state=latest
+      name={{item}}
+    with_items: 
+    - sudo
+    - nano
+    - tree
+    - ntp  
+
+  - name: Installation et lancement du service ntp
+    service: name=ntp state=started enabled=yes
+    tags: ntp
